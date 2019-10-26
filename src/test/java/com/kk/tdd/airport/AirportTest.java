@@ -8,37 +8,45 @@ class AirportTest {
     @Nested
     class EconomyFlightTest {
 
-        Flight economyFlight;
+        private Flight economyFlight;
+        private Passenger mike;
+        private Passenger john;
 
         @BeforeEach
         void setUp() {
             economyFlight = new EconomyFlight("1");
+            mike = new Passenger("Mike", false);
+            john = new Passenger("John", true);
         }
 
-        @Test
-        void testEconomyFlightUsualPassenger() {
-            Passenger mike = new Passenger("Mike", false);
+        @Nested
+        @DisplayName("When we have a usual passenger")
+        class UsualPassenger {
+            @Test
+            void testEconomyFlightUsualPassenger() {
+                Assertions.assertEquals("1", economyFlight.getId());
+                Assertions.assertTrue(economyFlight.addPassenger(mike));
+                Assertions.assertEquals(1, economyFlight.getPassengersList().size());
+                Assertions.assertEquals("Mike", economyFlight.getPassengersList().get(0).getName());
 
-            Assertions.assertEquals("1", economyFlight.getId());
-            Assertions.assertTrue(economyFlight.addPassenger(mike));
-            Assertions.assertEquals(1, economyFlight.getPassengersList().size());
-            Assertions.assertEquals("Mike", economyFlight.getPassengersList().get(0).getName());
-
-            Assertions.assertTrue(economyFlight.removePassenger(mike));
-            Assertions.assertEquals(0, economyFlight.getPassengersList().size());
+                Assertions.assertTrue(economyFlight.removePassenger(mike));
+                Assertions.assertEquals(0, economyFlight.getPassengersList().size());
+            }
         }
 
-        @Test
-        void testEconomyFlightVipPassenger() {
-            Passenger john = new Passenger("John", true);
+        @Nested
+        @DisplayName("When we have a VIP passenger")
+        class VipPassenger {
+            @Test
+            void testEconomyFlightVipPassenger() {
+                Assertions.assertEquals("1", economyFlight.getId());
+                Assertions.assertTrue(economyFlight.addPassenger(john));
+                Assertions.assertEquals(1, economyFlight.getPassengersList().size());
+                Assertions.assertEquals("John", economyFlight.getPassengersList().get(0).getName());
 
-            Assertions.assertEquals("1", economyFlight.getId());
-            Assertions.assertTrue(economyFlight.addPassenger(john));
-            Assertions.assertEquals(1, economyFlight.getPassengersList().size());
-            Assertions.assertEquals("John", economyFlight.getPassengersList().get(0).getName());
-
-            Assertions.assertFalse(economyFlight.removePassenger(john));
-            Assertions.assertEquals(1, economyFlight.getPassengersList().size());
+                Assertions.assertFalse(economyFlight.removePassenger(john));
+                Assertions.assertEquals(1, economyFlight.getPassengersList().size());
+            }
         }
     }
 
