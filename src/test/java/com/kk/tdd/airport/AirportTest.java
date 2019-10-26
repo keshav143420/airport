@@ -73,4 +73,38 @@ class AirportTest {
             Assertions.assertEquals(1, businessFlight.getPassengersList().size());
         }
     }
+
+    @DisplayName("Given there is a premium flight")
+    @Nested
+    class PremiumFlightTest {
+
+        private Flight premiumFlight;
+        private Passenger mike;
+        private Passenger john;
+
+
+        @BeforeEach
+        void setUp() {
+            premiumFlight = new PremiumFlight("3");
+            mike = new Passenger("Mike", false);
+            john = new Passenger("John", true);
+        }
+
+        @Test
+        void testPremiumFlightUsualPassenger() {
+            Assertions.assertFalse(premiumFlight.addPassenger(mike));
+            Assertions.assertEquals(0, premiumFlight.getPassengersList().size());
+            Assertions.assertFalse(premiumFlight.removePassenger(mike));
+            Assertions.assertEquals(0, premiumFlight.getPassengersList().size());
+        }
+
+        @Test
+        void testPremiumFlightVipPassenger() {
+            Assertions.assertTrue(premiumFlight.addPassenger(john));
+            Assertions.assertEquals(1, premiumFlight.getPassengersList().size());
+            Assertions.assertTrue(premiumFlight.removePassenger(john));
+            Assertions.assertEquals(0, premiumFlight.getPassengersList().size());
+        }
+    }
+
 }
