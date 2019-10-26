@@ -1,16 +1,22 @@
 package com.kk.tdd.airport;
 
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Nested;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 
 class AirportTest {
 
+    @DisplayName("Given there is a economy flight")
     @Nested
     class EconomyFlightTest {
+
+        Flight economyFlight;
+
+        @BeforeEach
+        void setUp() {
+            economyFlight = new EconomyFlight("1");
+        }
+
         @Test
         void testEconomyFlightUsualPassenger() {
-            Flight economyFlight = new EconomyFlight("1");
             Passenger mike = new Passenger("Mike", false);
 
             Assertions.assertEquals("1", economyFlight.getId());
@@ -24,7 +30,6 @@ class AirportTest {
 
         @Test
         void testEconomyFlightVipPassenger() {
-            Flight economyFlight = new EconomyFlight("1");
             Passenger john = new Passenger("John", true);
 
             Assertions.assertEquals("1", economyFlight.getId());
@@ -37,32 +42,35 @@ class AirportTest {
         }
     }
 
+    @DisplayName("Given there is a business flight")
     @Nested
     class BusinessFlightTest {
+
+        Flight businessFlight;
+
+        @BeforeEach
+        void setUp() {
+            businessFlight = new BusinessFlight("2");
+        }
+
         @Test
         void testBusinessFlightUsualPassenger() {
-            Flight businessFlight = new BusinessFlight("2");
-
             Passenger mike = new Passenger("Mike", false);
 
             Assertions.assertFalse(businessFlight.addPassenger(mike));
             Assertions.assertEquals(0, businessFlight.getPassengersList().size());
             Assertions.assertFalse(businessFlight.removePassenger(mike));
             Assertions.assertEquals(0, businessFlight.getPassengersList().size());
-
         }
 
         @Test
         void testBusinessFlightVipPassenger() {
-            Flight businessFlight = new BusinessFlight("2");
-
             Passenger john = new Passenger("John", true);
 
             Assertions.assertTrue(businessFlight.addPassenger(john));
             Assertions.assertEquals(1, businessFlight.getPassengersList().size());
             Assertions.assertFalse(businessFlight.removePassenger(john));
             Assertions.assertEquals(1, businessFlight.getPassengersList().size());
-
         }
     }
 }
