@@ -1,8 +1,7 @@
 package com.kk.tdd.airport;
 
-
 public class EconomyFlight extends Flight {
-
+    
     public EconomyFlight(String id) {
         super(id);
     }

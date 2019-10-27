@@ -57,6 +57,7 @@ class AirportTest {
         @Nested
         @DisplayName("When we have a VIP passenger")
         class VipPassenger {
+
             @Test
             @DisplayName("Then you can add him but cannot remove him from an economy flight")
             void testEconomyFlightVipPassenger() {
@@ -68,7 +69,6 @@ class AirportTest {
                         () -> assertFalse(economyFlight.removePassenger(john)),
                         () -> assertEquals(1, economyFlight.getPassengersSet().size())
                 );
-
             }
 
             @DisplayName("Then you cannot add him to an economy flight more than once")
@@ -89,6 +89,7 @@ class AirportTest {
     @DisplayName("Given there is a business flight")
     @Nested
     class BusinessFlightTest {
+
         private Flight businessFlight;
         private Passenger mike;
         private Passenger john;
@@ -149,6 +150,7 @@ class AirportTest {
     @DisplayName("Given there is a premium flight")
     @Nested
     class PremiumFlightTest {
+
         private Flight premiumFlight;
         private Passenger mike;
         private Passenger john;

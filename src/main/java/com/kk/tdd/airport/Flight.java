@@ -23,5 +23,4 @@ public abstract class Flight {
     public abstract boolean addPassenger(Passenger passenger);
 
     public abstract boolean removePassenger(Passenger passenger);
-
 }
