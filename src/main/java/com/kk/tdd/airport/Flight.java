@@ -1,22 +1,23 @@
 package com.kk.tdd.airport;
 
-import java.util.*;
+import lombok.Getter;
+
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
 
 public abstract class Flight {
 
+    Set<Passenger> passengersSet = new HashSet<>();
+    @Getter
     private String id;
-    Set<Passenger> passengersList = new HashSet<>();
 
     public Flight(String id) {
         this.id = id;
     }
 
-    public String getId() {
-        return id;
-    }
-
     public Set<Passenger> getPassengersSet() {
-        return Collections.unmodifiableSet(passengersList);
+        return Collections.unmodifiableSet(passengersSet);
     }
 
     public abstract boolean addPassenger(Passenger passenger);

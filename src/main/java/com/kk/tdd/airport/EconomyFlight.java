@@ -1,19 +1,21 @@
 package com.kk.tdd.airport;
 
+
 public class EconomyFlight extends Flight {
+
     public EconomyFlight(String id) {
         super(id);
     }
 
     @Override
     public boolean addPassenger(Passenger passenger) {
-        return passengersList.add(passenger);
+        return passengersSet.add(passenger);
     }
 
     @Override
     public boolean removePassenger(Passenger passenger) {
-        if(!passenger.isVip()){
-            return passengersList.remove((passenger));
+        if (!passenger.isVip()) {
+            return passengersSet.remove((passenger));
         }
         return false;
     }
